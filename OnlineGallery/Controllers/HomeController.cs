@@ -16,8 +16,9 @@ namespace OnlineGallery.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-            _ = await GetAllAPIArtworks();
-            return View();
+            APIArtwork artwork = await GetArtworkById();
+            APIArtworkWithPagination artworkList = await GetAllArtworks();
+            return View(artworkList);
         }
 
         public IActionResult Privacy()
@@ -33,9 +34,9 @@ namespace OnlineGallery.Controllers
 
         private HttpClient client;
 
-        public async Task<APIArtwork> GetAllAPIArtworks()
+        public async Task<APIArtwork> GetArtworkById()
         {
-            var url = string.Format("https://api.artic.edu/api/v1/artworks/129884?fields=title");
+            var url = string.Format("https://api.artic.edu/api/v1/artworks/129884?fields=title,image_id");
             var result = new APIArtwork();
             client = new HttpClient();
             var response = await client.GetAsync(url);
@@ -43,13 +44,7 @@ namespace OnlineGallery.Controllers
             {
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
-                var unknownObject = JsonDocument.Parse(stringResponse);
-                JsonElement productName = unknownObject.RootElement.GetProperty("data");
-                var title = productName.Deserialize<APIArtwork>();
-
                 result = JsonSerializer.Deserialize<APIArtwork>(stringResponse, new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
-
-                _ = result.Data;
             }
             else
             {
@@ -58,5 +53,26 @@ namespace OnlineGallery.Controllers
 
             return result;
         }
+
+        public async Task<APIArtworkWithPagination> GetAllArtworks()
+        {
+            var url = string.Format("https://api.artic.edu/api/v1/artworks");
+            var result = new APIArtworkWithPagination();
+            client = new HttpClient();
+            var response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var stringResponse = await response.Content.ReadAsStringAsync();
+
+                result = JsonSerializer.Deserialize<APIArtworkWithPagination>(stringResponse, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            }
+            else
+            {
+                throw new HttpRequestException(response.ReasonPhrase);
+            }
+
+            return result;
+        }
+
     }
 }
