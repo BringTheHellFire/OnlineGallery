@@ -1,0 +1,9 @@
+﻿@model APIArtworkWithPagination
+
+<div class="text-center">
+    @foreach(APIArtworkData data in Model.Data)
+    {
+        <p>@data.Title</p>
+        <img src="@(Model.config.iiif_url + "/" + data.image_id + "/full/843,/0/default.jpg")" />
+    }
+</div>
