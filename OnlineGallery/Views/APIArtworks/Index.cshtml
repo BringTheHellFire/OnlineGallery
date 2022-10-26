@@ -1,9 +1,27 @@
 ﻿@model APIArtworkWithPagination
 
-<div class="text-center">
-    @foreach(APIArtworkData data in Model.Data)
-    {
-        <p>@data.Title</p>
-        <img src="@(Model.config.iiif_url + "/" + data.image_id + "/full/843,/0/default.jpg")" />
-    }
+<div class="container-fluid">
+    <div class="row">
+
+        @foreach(APIArtworkData data in Model.Data)
+        {
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="d-flex justify-content-center pb-5">
+                    <div class="artwork-post-container">
+                        <div class="d-flex justify-content-center">
+                            <div class="artwork-image-container">
+                                <img class="img-fluid" src="@(Model.config.iiif_url + "/" + data.image_id + "/full/843,/0/default.jpg")" />
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end">
+                            <div class="d-flex align-self-center">
+                                <p>@data.Title</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
 </div>

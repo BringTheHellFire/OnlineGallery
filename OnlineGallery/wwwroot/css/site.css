@@ -30,3 +30,9 @@ nav .navbar-nav li a {
 a {
     color: #C9ADA7;
 }
+
+.artwork-post-container {
+    height: 450px;
+    width: 350px;
+    background-color: #4A4E69;
+}
