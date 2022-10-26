@@ -10,5 +10,8 @@ namespace OnlineGallery.DAL
             : base(options)
         {
         }
+
+        public DbSet<AppUser> Users { get; set; }
+        public DbSet<UserArtwork> UserArtworks { get; set; }
     }
 }
