@@ -20,4 +20,8 @@
     <ProjectReference Include="..\OnlineGallery.Model\OnlineGallery.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
