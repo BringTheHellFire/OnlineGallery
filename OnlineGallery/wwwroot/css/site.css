@@ -9,10 +9,24 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    background-color: #F2E9E4;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #F2E9E4;
+}
+
+header {
+    background-color: #22223B;
+}
+
+nav .navbar-nav li a {
+    color: #F2E9E4;
+}
+
+a {
+    color: #C9ADA7;
 }
