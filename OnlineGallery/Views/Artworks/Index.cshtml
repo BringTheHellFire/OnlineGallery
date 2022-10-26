@@ -9,5 +9,6 @@
     foreach(var artwork in Model)
     {
         <p>@artwork.Description</p>
+        <a asp-action="Edit" asp-route-id="@artwork.Id">Edit</a>
     }
 }

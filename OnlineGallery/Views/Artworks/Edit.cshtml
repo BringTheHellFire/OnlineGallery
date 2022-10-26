@@ -1,0 +1,9 @@
+﻿@model OnlineGallery.Model.UserArtwork
+
+<form asp-action="Edit" method="post">
+
+	<input type="hidden" asp-for="Id" value="@Model.Id" id="postId" />
+
+	<partial name="_CreateOrEdit" model="Model"/>
+
+</form>
