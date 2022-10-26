@@ -57,6 +57,7 @@ namespace OnlineGallery.Controllers
 
 
 
+
         [ActionName(nameof(Edit))]
         public IActionResult Edit(int id)
         {
@@ -80,6 +81,19 @@ namespace OnlineGallery.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+
+
+
+        public IActionResult Delete(int id)
+        {
+            var post = this._dbContext.UserArtworks.Where(p => p.Id == id).First();
+
+            this._dbContext.UserArtworks.Remove(post);
+            this._dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
