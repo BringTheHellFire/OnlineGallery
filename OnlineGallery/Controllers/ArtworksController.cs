@@ -1,13 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineGallery.DAL;
 using OnlineGallery.Model;
 
 namespace OnlineGallery.Controllers
 {
     public class ArtworksController : Controller
     {
+        private OnlineGalleryDbContext _dbContext;
+        private UserManager<AppUser> _userManager;
+
+        public ArtworksController(OnlineGalleryDbContext dbContext, UserManager<AppUser> userManager)
+        {
+            _dbContext = dbContext;
+            _userManager = userManager;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var userArtworks = _dbContext.UserArtworks.ToList();
+            return View(userArtworks);
         }
 
         public IActionResult CreatePost()
@@ -20,13 +32,19 @@ namespace OnlineGallery.Controllers
             Console.WriteLine(ModelState.IsValid);
             if (ModelState.IsValid)
             {
-                //Check if a user is logged in
-                    //If is, store ID
-                    //Else, store as annonymus
+                if(_userManager.GetUserId(base.User) != null)
+                {
+                    model.UserId = _userManager.GetUserId(base.User);
+                }
+                else
+                {
+                    model.Anonymus = true;
+                }
 
                 model.DateCreated = DateTime.Now;
 
-                //Save model to database
+                this._dbContext.UserArtworks.Add(model);
+                this._dbContext.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
             }
