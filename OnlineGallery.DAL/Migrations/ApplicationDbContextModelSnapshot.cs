@@ -332,13 +332,15 @@ namespace OnlineGallery.Data.Migrations
 
             modelBuilder.Entity("OnlineGallery.Model.UserArtwork", b =>
                 {
-                    b.HasOne("OnlineGallery.Model.Folder", null)
+                    b.HasOne("OnlineGallery.Model.Folder", "Folder")
                         .WithMany("Artworks")
                         .HasForeignKey("FolderId");
 
                     b.HasOne("OnlineGallery.Model.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Folder");
 
                     b.Navigation("User");
                 });

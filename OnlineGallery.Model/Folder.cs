@@ -15,6 +15,6 @@ namespace OnlineGallery.Model
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public List<UserArtwork> Artworks { get; set; }
+        public virtual List<UserArtwork>? Artworks { get; set; }
     }
 }

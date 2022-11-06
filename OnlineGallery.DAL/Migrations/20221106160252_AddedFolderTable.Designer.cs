@@ -12,7 +12,7 @@ using OnlineGallery.DAL;
 namespace OnlineGallery.Data.Migrations
 {
     [DbContext(typeof(OnlineGalleryDbContext))]
-    [Migration("20221106155647_AddedFolderTable")]
+    [Migration("20221106160252_AddedFolderTable")]
     partial class AddedFolderTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -334,13 +334,15 @@ namespace OnlineGallery.Data.Migrations
 
             modelBuilder.Entity("OnlineGallery.Model.UserArtwork", b =>
                 {
-                    b.HasOne("OnlineGallery.Model.Folder", null)
+                    b.HasOne("OnlineGallery.Model.Folder", "Folder")
                         .WithMany("Artworks")
                         .HasForeignKey("FolderId");
 
                     b.HasOne("OnlineGallery.Model.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Folder");
 
                     b.Navigation("User");
                 });

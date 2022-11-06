@@ -19,6 +19,9 @@ namespace OnlineGallery.Model
         public string? UserId { get; set; }
         public virtual AppUser? User { get; set; }
 
+        public int? FolderId { get; set; }
+        public virtual Folder? Folder { get; set; }
+
         public DateTime? DateCreated { get; set; }
 
     }
