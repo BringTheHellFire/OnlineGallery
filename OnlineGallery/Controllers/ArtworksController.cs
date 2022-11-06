@@ -26,8 +26,9 @@ namespace OnlineGallery.Controllers
 
 
 
-        public IActionResult Create()
+        public IActionResult Create(int? folderId)
         {
+            ViewBag.folderId = folderId;
             return View();
         }
         [HttpPost]
@@ -50,7 +51,7 @@ namespace OnlineGallery.Controllers
                 this._dbContext.UserArtworks.Add(model);
                 this._dbContext.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -94,6 +95,63 @@ namespace OnlineGallery.Controllers
             this._dbContext.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult GetFolders()
+        {
+            var folders = this._dbContext.Folders;
+            if (folders.Any())
+            {
+                return PartialView("_Folders", folders.ToList());
+            }
+            return PartialView("_Folders");
+        }
+        [HttpPost]
+        public IActionResult GetFolder(int? id)
+        {
+            var folder = this._dbContext.Folders.Where(p => p.Id == id).First();
+
+            if(folder != null)
+            {
+                var artworks = this._dbContext.UserArtworks.Where(p => p.FolderId == folder.Id).ToList();
+
+                folder.Artworks = artworks;
+
+                return PartialView("_Folder", folder);
+            }
+
+            return PartialView("_Folder");
+        }
+        public IActionResult AddFolder()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddFolder(Folder model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.CreatedDate = DateTime.Now;
+                //add created by what user id
+
+                this._dbContext.Folders.Add(model);
+                this._dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        [HttpPost]
+        public IActionResult DeleteFolder(int id)
+        {
+            var folder = this._dbContext.Folders.Where(p => p.Id == id).First();
+
+            this._dbContext.Folders.Remove(folder);
+            this._dbContext.SaveChanges();
+
+            return PartialView("_Folders");
+
         }
     }
 }

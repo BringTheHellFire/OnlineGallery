@@ -1,0 +1,9 @@
+﻿@model OnlineGallery.Model.UserArtwork
+
+<form asp-action="Create" method="POST">
+
+    <input type="hidden" asp-for="FolderId" value="@ViewData["folderId"]" />
+
+    <partial name="_CreateOrEdit" />
+
+</form>
