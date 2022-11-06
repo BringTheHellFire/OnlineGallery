@@ -5,6 +5,7 @@
         public int id { get; set; }
         public string Title { get; set; }
         public string image_id { get; set; }
+        public int? artist_id { get; set; }
         public string artist_title { get; set; }
     }
 }

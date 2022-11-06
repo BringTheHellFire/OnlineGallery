@@ -1,6 +1,6 @@
 ﻿namespace OnlineGallery.Models
 {
-    public class APIArtworkInfo
+    public class Info
     {
         public string license_text { get; set; }
         public List<string> license_links { get; set; }

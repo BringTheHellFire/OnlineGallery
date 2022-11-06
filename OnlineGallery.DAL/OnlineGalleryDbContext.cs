@@ -13,5 +13,6 @@ namespace OnlineGallery.DAL
 
         public DbSet<AppUser> Users { get; set; }
         public DbSet<UserArtwork> UserArtworks { get; set; }
+        public DbSet<Folder> Folders { get; set; }
     }
 }

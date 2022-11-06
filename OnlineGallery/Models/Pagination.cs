@@ -1,6 +1,6 @@
 ﻿namespace OnlineGallery.Models
 {
-    public class APIArtworkPagination
+    public class Pagination
     {
         public int total { get; set; }
         public int limit { get; set; }

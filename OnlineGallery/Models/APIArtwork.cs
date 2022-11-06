@@ -3,17 +3,17 @@
     public class APIArtwork
     {
         public APIArtworkData Data { get; set; }
-        public APIArtworkInfo Info { get; set; }
-        public APIArtworkConfig Config { get; set; }
+        public Info Info { get; set; }
+        public Config Config { get; set; }
 
         public APIArtwork()
         {
             Data = new APIArtworkData();
-            Info = new APIArtworkInfo();
-            Config = new APIArtworkConfig();
+            Info = new Info();
+            Config = new Config();
         }
 
-        public APIArtwork(APIArtworkData _data, APIArtworkInfo _info, APIArtworkConfig _config)
+        public APIArtwork(APIArtworkData _data, Info _info, Config _config)
         {
             Data = _data;
             Info = _info;

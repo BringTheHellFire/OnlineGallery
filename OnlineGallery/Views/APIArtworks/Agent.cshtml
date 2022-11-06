@@ -1,0 +1,21 @@
+﻿@model APIAgentWithPagination
+
+<div class="container-fluid">
+    <div class="row">
+
+        @foreach(APIAgentData data in Model.Data)
+        {
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="d-flex justify-content-center pb-5">
+                    <div class="agent-post-container">
+                        <div class="d-flex justify-content-start pt-1">
+                                 <p>@data.Title</p>
+                                 <p>@data.is_artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

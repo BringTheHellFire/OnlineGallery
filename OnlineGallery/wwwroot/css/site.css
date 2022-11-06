@@ -44,3 +44,42 @@ img {
     font-style: italic;
     font-size: smaller;
 }
+
+.home-header-container {
+    width: 100%;
+    height: 500px;
+    max-height: 700px;
+    margin-bottom: 10px;
+    background-color: #4A4E69;
+}
+.home-portfolio-container {
+    width: 100%;
+    height: 600px;
+    max-height: 800px;
+    margin-bottom: 10px;
+    background-color: #4A4E69;
+}
+.home-API-container {
+    width: 100%;
+    height: 800px;
+    max-height: 1000px;
+    margin-bottom: 10px;
+    background-color: #4A4E69;
+}
+
+.portfolio-folders-container {
+    width: 250px;
+    max-width: 300px;
+    background-color: #4A4E69;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+}
+.sidebar{
+    min-height: 700px;
+    width: 100%;
+}
+hr.hr-color {
+    background: #F2E9E4;
+}
+
