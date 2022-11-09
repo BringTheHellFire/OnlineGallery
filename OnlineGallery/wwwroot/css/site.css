@@ -50,7 +50,6 @@ img {
     height: 500px;
     max-height: 700px;
     margin-bottom: 10px;
-    background-color: #4A4E69;
 }
 .home-portfolio-container {
     width: 100%;
@@ -74,6 +73,7 @@ img {
     position: sticky;
     top: 0;
     bottom: 0;
+    border-radius: 15px;
 }
 .sidebar{
     min-height: 700px;
@@ -81,5 +81,8 @@ img {
 }
 hr.hr-color {
     background: #F2E9E4;
+}
+.portfolio-folder-display-container{
+    padding: 10px;
 }
 
