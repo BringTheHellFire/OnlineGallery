@@ -20,8 +20,7 @@ namespace OnlineGallery.Controllers
 
         public IActionResult Index()
         {
-            var userArtworks = _dbContext.UserArtworks.ToList();
-            return View(userArtworks);
+            return View();
         }
 
 
@@ -34,7 +33,6 @@ namespace OnlineGallery.Controllers
         [HttpPost]
         public IActionResult Create(UserArtwork model)
         {
-            Console.WriteLine(ModelState.IsValid);
             if (ModelState.IsValid)
             {
                 if(_userManager.GetUserId(base.User) != null)
@@ -100,7 +98,9 @@ namespace OnlineGallery.Controllers
         [HttpPost]
         public IActionResult GetFolders()
         {
-            var folders = this._dbContext.Folders;
+            var currentUserId = this._userManager.GetUserId(base.User);
+
+            var folders = this._dbContext.Folders.Where(p => p.CreatedById == currentUserId);
             if (folders.Any())
             {
                 return PartialView("_Folders", folders.ToList());
@@ -125,15 +125,15 @@ namespace OnlineGallery.Controllers
         }
         public IActionResult AddFolder()
         {
-            return View();
+            return PartialView("_AddFolder");
         }
         [HttpPost]
         public IActionResult AddFolder(Folder model)
         {
             if (ModelState.IsValid)
             {
+                model.CreatedById = this._userManager.GetUserId(base.User);
                 model.CreatedDate = DateTime.Now;
-                //add created by what user id
 
                 this._dbContext.Folders.Add(model);
                 this._dbContext.SaveChanges();

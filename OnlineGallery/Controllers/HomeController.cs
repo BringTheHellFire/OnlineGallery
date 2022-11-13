@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineGallery.Models;
 using System.Diagnostics;
 using System.Text.Json;
@@ -14,9 +15,36 @@ namespace OnlineGallery.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Contact()
+        {
+            this.FillDropdownValues();
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(ContactModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+        private void FillDropdownValues()
+        {
+            var selectItems = new List<SelectListItem>();
+
+            selectItems.Add(new SelectListItem("-odaberite-", ""));
+            selectItems.Add(new SelectListItem("Croatia", "0"));
+            selectItems.Add(new SelectListItem("Germany", "1"));
+            selectItems.Add(new SelectListItem("England", "2"));
+
+            ViewBag.CountryItems = selectItems;
         }
 
         public IActionResult Privacy()

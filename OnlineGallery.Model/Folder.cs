@@ -12,7 +12,12 @@ namespace OnlineGallery.Model
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
+
+        public string? CreatedById { get; set; }
+        public virtual AppUser? CreatedByUser { get; set; }
+
         public DateTime? CreatedDate { get; set; }
 
         public virtual List<UserArtwork>? Artworks { get; set; }
