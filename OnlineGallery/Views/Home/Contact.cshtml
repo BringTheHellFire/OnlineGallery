@@ -1,42 +1,70 @@
 ﻿@model ContactModel
 
+<div class="container p-2">
+    <h1>Contact us!</h1>
+</div>
+
 <div class="container-fluid">
 
-    <form asp-action="Contact" method="post">
+    <div class="row h-100">
+        <div class="col-12 col-md-6">
+            <form asp-action="Contact" method="post">
 
-        <div class="mb-3">
-            <label for="FirstName" class="form-label">Email address</label>
-            <input asp-for="FirstName" type="text" class="form-control" id="FirstName" aria-describedby="emailHelp">
-            <span asp-validation-for="FirstName" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="mb-3">
+                            <label for="FirstName" class="form-label">First Name:</label>
+                            <input asp-for="FirstName" type="text" class="form-control" id="FirstName" aria-describedby="emailHelp">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="mb-3">
+                            <label for="LastName" class="form-label">Last Name:</label>
+                            <input asp-for="LastName" type="text" class="form-control" id="LastName" aria-describedby="emailHelp">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email address</label>
+                    <input asp-for="Email" type="email" class="form-control" id="Email" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Country" class="form-label">Country</label>
+                    <select asp-for="Country" asp-items="ViewBag.CountryItems" class="form-control"></select>
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+		            <label for="Subject" class="form-label">Subject</label>
+		            <textarea asp-for="Subject" type="text" class="form-control" rows="3" placeholder="Ask us any question!" ></textarea>
+		            <span asp-validation-for="Subject" class="text-danger"></span>
+	            </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label for="LastName" class="form-label">Email address</label>
-            <input asp-for="LastName" type="text" class="form-control" id="LastName" aria-describedby="emailHelp">
-            <span asp-validation-for="LastName" class="text-danger"></span>
+        <div class="col-12 col-md-6 mt-3 mt-lg-0 p-2 p-lg-0">
+            <div class="d-flex h-100 justify-content-start">
+                <div class="p-2 justify-content-end h-100">
+                    <h2>Contact information: </h2>
+                    <p>Phone Number: 000-000-000</p>
+                    <p>Email Address: example@email.com</p>
+                    <p>Adress: Sample Street 1</p>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
 
-        <div class="mb-3">
-            <label for="Email" class="form-label">Email address</label>
-            <input asp-for="Email" type="email" class="form-control" id="Email" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label for="Country" class="form-label">Country</label>
-            <select asp-for="Country" asp-items="ViewBag.CountryItems" class="form-control"></select>
-            <span asp-validation-for="Country" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-		    <label for="Subject" class="form-label">Subject</label>
-		    <textarea asp-for="Subject" type="text" class="form-control" rows="3" placeholder="Ask us any question!" ></textarea>
-		    <span asp-validation-for="Subject" class="text-danger"></span>
-	    </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-
-    </form>
-
+<div class="container-fluid mt-2">
+    <div class="d-flex h-100 p-2 justify-content-end align-items-end">
+        <img src="~/files/contactSVG.svg" class="img-fluid" />
+    </div>
 </div>

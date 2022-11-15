@@ -39,12 +39,17 @@ namespace OnlineGallery.Controllers
         {
             var selectItems = new List<SelectListItem>();
 
-            selectItems.Add(new SelectListItem("-odaberite-", ""));
+            selectItems.Add(new SelectListItem("-choose one-", ""));
             selectItems.Add(new SelectListItem("Croatia", "0"));
             selectItems.Add(new SelectListItem("Germany", "1"));
             selectItems.Add(new SelectListItem("England", "2"));
 
             ViewBag.CountryItems = selectItems;
+        }
+
+        public IActionResult About()
+        {
+            return View();
         }
 
         public IActionResult Privacy()
