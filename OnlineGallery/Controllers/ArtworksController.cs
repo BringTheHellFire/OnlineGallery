@@ -49,7 +49,9 @@ namespace OnlineGallery.Controllers
                 this._dbContext.UserArtworks.Add(model);
                 this._dbContext.SaveChanges();
 
-                return RedirectToAction("Index");
+                var post = this._dbContext.UserArtworks.OrderByDescending(p => p.Id).First();
+
+                return RedirectToAction("AddImage", new { postID = post.Id });
             }
             return View();
         }
@@ -152,6 +154,54 @@ namespace OnlineGallery.Controllers
 
             return PartialView("_Folders");
 
+        }
+
+
+        private string? image;
+
+        public IActionResult AddImage(int postId)
+        {
+            var post = this._dbContext.UserArtworks.Where(p => p.Id == postId).First();
+            return View(post);
+        }
+
+        public async Task<IActionResult> UploadAttachment(int postId, IFormFile file)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/files");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            var userId = this._userManager.GetUserId(base.User);
+
+            var user = this._userManager.Users.Where(u => u.Id == userId).First();
+
+            var fileName = user.UserName + DateTime.Today.Date.ToShortDateString() + file.FileName;
+            string fileNameWithPath = Path.Combine(path, fileName);
+
+            bool fileExists = System.IO.File.Exists(fileNameWithPath);
+            if (fileExists)
+            {
+                //Do something about it
+            }
+            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            var artwork = this._dbContext.UserArtworks.Where(p => p.Id == postId).First();
+
+            artwork.ImagePath = fileName;
+
+            var ok = await this.TryUpdateModelAsync(artwork);
+
+            if (ok)
+            {
+                this._dbContext.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

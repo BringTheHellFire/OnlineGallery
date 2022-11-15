@@ -19,11 +19,15 @@
     </div>
    
     <hr class="hr-color mx-2" />
-    
+
     if(Model.Artworks != null)
     {
         foreach (var artwork in Model.Artworks)
         {
+            @if(artwork.ImagePath != null)
+            {
+                <img src="~/files/@artwork.ImagePath" class="rounded img-fluid">
+            }
             <p>@artwork.Description</p>
             <a asp-action="Edit" asp-route-id="@artwork.Id">Edit</a>
             <a asp-action="Delete" asp-route-id="@artwork.Id">Delete</a>

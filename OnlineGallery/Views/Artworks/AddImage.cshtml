@@ -1,0 +1,38 @@
+﻿@model OnlineGallery.Model.UserArtwork
+
+<label class="control-label">Images</label> 
+	<form id="postImages" asp-controller="Artworks" asp-action="UploadAttachment" asp-route-postId="@Model.Id" enctype="multipart/form-data" class="dropzone">
+		<input type="hidden" value="@Model.Id"/>
+	</form> 
+	<div class="alert alert-info mt-2">
+		<p>You can only upload files with these extencions: .jpg, .png, .gif, .jpeg</p>
+	</div>
+
+	<a asp-action="Index" class="btn-primary">Confirm</a>
+
+
+@section Scripts{
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+
+
+<script type="text/javascript"> 
+	Dropzone.options.postImages = { 
+		addRemoveLinks: true,
+		paramName: "file",
+		acceptedFiles: ".png,.jpg,.gif,.jpeg",
+		maxFiles: 1,
+		dictInvalidFileType: "You can't upload files of this type.",
+		success: function (file, response) { 
+			console.log({ file, response });
+		},
+		removedfile(file) {
+			console.log(file);
+			if (file.previewElement != null && file.previewElement.parentNode != null) {
+				file.previewElement.parentNode.removeChild(file.previewElement);
+			}
+			return this._updateMaxFilesReachedClass();
+		},
+	}; 
+</script>
+}
