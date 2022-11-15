@@ -1,5 +1,7 @@
 ﻿@model OnlineGallery.Model.Folder
 
+<div class="container-fluid">
+
 @if(Model != null)
 {
     <div class="row">
@@ -12,7 +14,7 @@
             <div class="d-flex justify-content-end">
                 @if(Model.Id != 0)
                 {
-                    <a class="text-dark" asp-action="Create" asp-route-folderId="@Model.Id">Add Artwork</a>
+                    <a class="btn btn-primary" asp-action="Create" asp-route-folderId="@Model.Id">Add Artwork</a>
                 }
             </div>
         </div>
@@ -20,18 +22,27 @@
    
     <hr class="hr-color mx-2" />
 
-    if(Model.Artworks != null)
-    {
-        foreach (var artwork in Model.Artworks)
-        {
-            @if(artwork.ImagePath != null)
-            {
-                <img src="~/files/@artwork.ImagePath" class="rounded img-fluid">
-            }
-            <p>@artwork.Description</p>
-            <a asp-action="Edit" asp-route-id="@artwork.Id">Edit</a>
-            <a asp-action="Delete" asp-route-id="@artwork.Id">Delete</a>
-        }
-    }
     
+
+        @if(Model.Artworks != null)
+        {
+            @foreach (var artwork in Model.Artworks)
+            {
+                <div class="container border border-dark rounded p-2 mt-2">
+                    @if(artwork.ImagePath != null)
+                    {
+                        <div class="mt-2">
+                            <img src="~/files/@artwork.ImagePath" class="rounded img-fluid mb-2">
+                        </div>
+                    }
+                    <a asp-action="Details" asp-route-id="@artwork.Id" class="btn btn-primary">@artwork.Name</a>
+                    <p>@artwork.Description</p>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@artwork.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@artwork.Id">Delete</a>
+                </div>
+            }
+        }
+
 }
+
+

@@ -10,9 +10,7 @@ namespace OnlineGallery.Controllers
         private HttpClient client;
         public async Task<IActionResult> IndexAsync()
         {
-            APIArtwork artwork = await GetArtworkById();
             APIArtworkWithPagination artworkList = await GetAllArtworks();
-            APIArtworkWithPagination artworkList2 = await GetNextPage(artworkList.Pagination.next_url);
             return View(artworkList);
         }
 
@@ -63,10 +61,17 @@ namespace OnlineGallery.Controllers
             return result;
         }
 
-        public async Task<APIArtworkWithPagination> GetNextPage(string url)
+        public async Task<IActionResult> GoNextPage(int number)
+        {
+            var artworks = await this.GetNextPage(number);
+            return View("Index", artworks);
+        }
+
+        public async Task<APIArtworkWithPagination> GetNextPage(int number)
         {
             var result = new APIArtworkWithPagination();
             client = new HttpClient();
+            var url = "https://api.artic.edu/api/v1/artworks?page=" + number.ToString();
             var response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {

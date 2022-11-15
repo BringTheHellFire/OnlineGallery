@@ -16,14 +16,10 @@ namespace OnlineGallery.Controllers
             _userManager = userManager;
         }
 
-
-
         public IActionResult Index()
         {
             return View();
         }
-
-
 
         public IActionResult Create(int? folderId)
         {
@@ -79,7 +75,7 @@ namespace OnlineGallery.Controllers
             if (ok && this.ModelState.IsValid)
             {
                 this._dbContext.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -203,5 +199,14 @@ namespace OnlineGallery.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        public IActionResult Details(int id)
+        {
+            var post = this._dbContext.UserArtworks.Where(p => p.Id == id).First();
+
+            return View(post);
+        }
+
     }
 }

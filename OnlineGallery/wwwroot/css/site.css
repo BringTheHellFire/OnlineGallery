@@ -90,9 +90,14 @@ img {
     width: 100%;
 }
 hr.hr-color {
-    background: #F2E9E4;
+    background: #22223B;
 }
 .portfolio-folder-display-container{
     padding: 10px;
+}
+
+.details-image-display{
+    height: 700px;
+    width: auto;
 }
 

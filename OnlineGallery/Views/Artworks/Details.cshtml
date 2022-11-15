@@ -1,0 +1,39 @@
+﻿@model OnlineGallery.Model.UserArtwork
+
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Artworks" asp-action="Index">Portfolio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+  </ol>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-12 col-lg-6">
+
+            <img src="~/files/@Model.ImagePath" class="rounded img-fluid h-100">
+
+        </div>
+
+        <div class="col-12 col-lg-6">
+
+            <p> <span class="fw-bold">Artwork name:</span> @Model.Name</p>
+            <p class="fw-bold">Description:</p>
+            <p>@Model.Description</p>
+            <p> <span class="fw-bold">Date Created:</span> @Model.DateCreated</p>
+
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+
