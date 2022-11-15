@@ -146,16 +146,26 @@ namespace OnlineGallery.Controllers
             }
             return View();
         }
-        [HttpPost]
+        
         public IActionResult DeleteFolder(int id)
         {
             var folder = this._dbContext.Folders.Where(p => p.Id == id).First();
 
+            var artworks = this._dbContext.UserArtworks.Where(p => p.FolderId == folder.Id).ToList();
+
+            foreach(var artwork in artworks)
+            {
+                if (artwork.ImagePath != null)
+                {
+                    System.IO.File.Delete(artwork.ImagePath);
+                }
+                this._dbContext.UserArtworks.Remove(artwork);
+            }
+
             this._dbContext.Folders.Remove(folder);
             this._dbContext.SaveChanges();
 
-            return PartialView("_Folders");
-
+            return RedirectToAction("Index");
         }
 
         public IActionResult AddImage(int postId)
@@ -210,6 +220,24 @@ namespace OnlineGallery.Controllers
             var post = this._dbContext.UserArtworks.Where(p => p.Id == id).First();
 
             return View(post);
+        }
+
+        public IActionResult Portfolios()
+        {
+            var artworks = this._dbContext.UserArtworks.OrderByDescending(p => p.DateCreated).ToList();
+            foreach (var artwork in artworks)
+            {
+                if(artwork.UserId != null)
+                {
+                    artwork.User = this._userManager.Users.Where(u => u.Id == artwork.UserId).First();
+                }
+                if (artwork.FolderId != null)
+                {
+                    artwork.Folder = this._dbContext.Folders.Where(f => f.Id == artwork.FolderId).First();
+                }
+                
+            }
+            return View(artworks);
         }
 
     }

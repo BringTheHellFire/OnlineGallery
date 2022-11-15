@@ -1,26 +1,32 @@
 ﻿@model List<OnlineGallery.Model.UserArtwork>
 
 
-<div class="container-fluid d-flex">
-    <div class="sticky-top">
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-header px-2 pt-3 pb-4">
-                <div class="d-flex">
-                    <h3> <span class="bg-white text-dark rounded box-shadow px-3 me-2">Folders</span> </h3>
-                </div>
-				<hr class="hr-color mx-2" />
-                <div id="addFolder" class="d-flex mt-2">
-                    <partial name="_AddFolder" model="new OnlineGallery.Model.Folder()" />
-                </div>
-            </div>
-			<div id="folders">
-				<partial name="_Folders" model="new List<OnlineGallery.Model.Folder>()" />
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12 col-lg-3">
+			<div class="sticky-top">
+				<div class="sidebar" id="sidebar">
+					<div class="sidebar-header px-2 pt-3 pb-4">
+						<div class="d-flex">
+							<h3> <span class="bg-white text-dark rounded box-shadow px-3 me-2">Folders</span> </h3>
+						</div>
+						<hr class="hr-color mx-2" />
+						<div id="addFolder" class="d-flex mt-2">
+							<partial name="_AddFolder" model="new OnlineGallery.Model.Folder()" />
+						</div>
+					</div>
+					<div id="folders">
+						<partial name="_Folders" model="new List<OnlineGallery.Model.Folder>()" />
+					</div>
+				</div>
 			</div>
-        </div>
-    </div>
-    <div class="portfolio-folder-display-container w-100" id="folder">
-		<partial name="_Folder" model="new OnlineGallery.Model.Folder()" />
-    </div>
+		</div>
+		<div class="col-12 col-lg-9">
+			<div class="portfolio-folder-display-container w-100" id="folder">
+				<partial name="_Folder" model="new OnlineGallery.Model.Folder()" />
+			</div>
+		</div>
+	</div>
 </div>
 
 

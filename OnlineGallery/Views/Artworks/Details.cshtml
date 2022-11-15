@@ -1,13 +1,14 @@
 ﻿@model OnlineGallery.Model.UserArtwork
 
-
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-    <li class="breadcrumb-item"><a asp-controller="Artworks" asp-action="Index">Portfolio</a></li>
-    <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
-  </ol>
-</nav>
+<div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Artworks" asp-action="Index">Portfolio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+      </ol>
+    </nav>
+</div>
 
 <div class="container-fluid">
 
@@ -15,7 +16,9 @@
 
         <div class="col-12 col-lg-6">
 
-            <img src="~/files/@Model.ImagePath" class="rounded img-fluid h-100">
+            <div class="d-flex justify-content-end">
+                <img src="~/files/@Model.ImageName" class="rounded img-fluid h-100">
+            </div>
 
         </div>
 
