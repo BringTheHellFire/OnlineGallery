@@ -22,6 +22,7 @@ namespace OnlineGallery.Model
         public int? FolderId { get; set; }
         public virtual Folder? Folder { get; set; }
 
+        public string? ImageName { get; set; }
         public string? ImagePath { get; set; }
 
         public DateTime? DateCreated { get; set; }

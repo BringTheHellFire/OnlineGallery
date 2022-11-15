@@ -87,6 +87,12 @@ namespace OnlineGallery.Controllers
         {
             var post = this._dbContext.UserArtworks.Where(p => p.Id == id).First();
 
+            if(post.ImagePath != null)
+            {
+                System.IO.File.Delete(post.ImagePath);
+            }
+            
+
             this._dbContext.UserArtworks.Remove(post);
             this._dbContext.SaveChanges();
 
@@ -152,9 +158,6 @@ namespace OnlineGallery.Controllers
 
         }
 
-
-        private string? image;
-
         public IActionResult AddImage(int postId)
         {
             var post = this._dbContext.UserArtworks.Where(p => p.Id == postId).First();
@@ -188,7 +191,8 @@ namespace OnlineGallery.Controllers
 
             var artwork = this._dbContext.UserArtworks.Where(p => p.Id == postId).First();
 
-            artwork.ImagePath = fileName;
+            artwork.ImageName = fileName;
+            artwork.ImagePath = fileNameWithPath;
 
             var ok = await this.TryUpdateModelAsync(artwork);
 

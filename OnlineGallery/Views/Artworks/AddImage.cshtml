@@ -1,6 +1,7 @@
 ﻿@model OnlineGallery.Model.UserArtwork
 
-<label class="control-label">Images</label> 
+<div class="container">
+	<label class="control-label">Images</label> 
 	<form id="postImages" asp-controller="Artworks" asp-action="UploadAttachment" asp-route-postId="@Model.Id" enctype="multipart/form-data" class="dropzone">
 		<input type="hidden" value="@Model.Id"/>
 	</form> 
@@ -9,6 +10,9 @@
 	</div>
 
 	<a asp-action="Index" class="btn btn-primary">Confirm</a>
+	<a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Cancel</a>
+</div>
+
 
 
 @section Scripts{
